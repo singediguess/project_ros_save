@@ -1,0 +1,21 @@
+sudo apt-get install subversion libjpeg8-dev imagemagick libv4l-dev
+
+svn co https://svn.code.sf.net/p/mjpg-streamer/code/
+
+cd mjpg-streamer/mjpg-streamer
+
+ make
+
+ sudo make install
+
+wget http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc && sudo apt-key add ./lrkey.asc
+
+打開/etc/apt/source.list，並新增下列資訊(注意修改權限)deb http://www.linux-projects.org/listing/uv4l_repo/raspbian/ wheezy mainsudo apt-get update 及 sudo apt-get install uv4l uv4l-raspicam
+
+sudo pkill uv4l
+sudo apt-get update (非必要, 建議執行)
+sudo apt-get install uv4l-uvc
+sudo apt-get install uv4l-xscreen
+sudo apt-get install uv4l-mjpegstream
+
+LD_PRELOAD=/usr/lib/uv4l/uv4lext/armv6l/libuv4lext.so mjpg_streamer -i "./input_uvc.so" -o "./output_http.so -w ./www"
